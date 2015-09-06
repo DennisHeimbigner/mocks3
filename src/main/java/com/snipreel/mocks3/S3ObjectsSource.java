@@ -20,6 +20,7 @@ class S3ObjectsSource {
     S3BucketSource getStoreSource (Type storeType) {
         switch (storeType) {
             case MEMORY : return new S3BucketMemorySource();
+            case FILE : return new S3BucketFileSource();
         }
         return NULL_SOURCE;
     }
@@ -37,7 +38,8 @@ class S3ObjectsSource {
     
     S3ObjectSource getStore (Type storeType) {
         switch (storeType) {
-            case MEMORY : return new S3ObjectMemorySource();
+            case MEMORY: return new S3ObjectMemorySource();
+            case FILE: return new S3ObjectFileSource();
         }
         return NULL;
     }
