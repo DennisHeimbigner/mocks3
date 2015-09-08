@@ -52,11 +52,15 @@ class S3ObjectsSource {
     };
     
     static final S3ObjectSource NULL = new S3ObjectSource () {
+        public String getName()                       { return null; }
         public void addObject(String key,byte[] data) {}
         public byte[] getObject(String key)           { return null; }
         public boolean hasObject(String key)          { return false; }
         public List<String> getKeys ()                { return Collections.<String>emptyList(); }
         public boolean removeObject (String key)      { return false; }
+        public long getObjectLength(String key)                 { return -1; }
+        public byte[] getObjectRange(String key, long start, long count) {return null;}
+        public boolean setObjectRange(String key, byte[] data, long start, long count) {return false;}
     };
 
 }
