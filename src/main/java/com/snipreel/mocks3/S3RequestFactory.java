@@ -79,7 +79,7 @@ class S3RequestFactory
         protected S3BucketSource bucketSource = null;
         protected String urlprefix = null;
 
-        public void Initialize(S3BucketSource bucketsource, S3Info info, HttpServletResponse rsp)
+        public void initialize(S3BucketSource bucketsource, S3Info info, HttpServletResponse rsp)
         {
             this.bucketSource = this.bucketSource;
             this.requestInfo = info;

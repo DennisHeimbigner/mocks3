@@ -22,13 +22,18 @@ class S3Info
         } catch (URISyntaxException use) {
             throw new IllegalArgumentException("Malformed request URI: " + requesturi);
         }
-        // We assume that urls are of the form: http://.../bucket/object
+        // We assume that urls are of the form: http://bucket.hostname:port/object
+        String hostname = getHeader("Host");
+	if(hostname == null)
+	    throw new IllegalArgumentException("Missing Host: header");
+        int index = host.indexOf('.');	
+	if(index < 0)
+	    throw new IllegalArgumentException("Missing bucket id");
+	this.bucket = host.substring(0,index);
         String path = this.requestURI.getPath();
-        int index = path.indexOf('/');
-        if(index < 0)
-            index = path.length();
-        this.bucket = path.substring(0, index);
-        this.key = path.substring(index, path.length()); // keep leading '/'
+	if(path.startsWith("/"))
+	    path = path.substring(1);
+        this.key = path;
     }
 
     protected static String removeLeadingSlash(String input)
